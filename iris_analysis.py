@@ -13,12 +13,16 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-# Load iris dataset
 from sklearn.datasets import load_iris
 #!%matplotlib ipympl
 
+##############################################################
 # %%
+# Load iris dataset
+##############################################################
 iris = load_iris()
+dline = "="*35
+line = "-"*35
 
 # map target names to target and clasify the different iris
 target_names = iris.target_names[iris.target]
@@ -29,16 +33,14 @@ features = iris.feature_names
 df_iris = pd.DataFrame(data = iris.data, columns=features)
 df_iris["species"] = target_names
 
-# %%
 print("Check general dataset information")
-print("-"*35)
+print(line)
 print(df_iris.describe())
 
 
-# %%
-print("="*35)
+print(dline)
 print("\n\nCheck species distribution")
-print("-"*35)
+print(line)
 print(df_iris.groupby("species").size())
 
 
@@ -88,7 +90,9 @@ print("It looks like the features of all species display a Gausian distribution.
 
 plt.show()
 
+##############################################################
 # %%
+##############################################################
 # Multivariate plots
 print("Check interactions between the variables. Plot attribute pairs.")
 pp = sns.pairplot(df_iris, hue="species", diag_kind="kde", height=2)
@@ -146,7 +150,7 @@ algorithm_names = list(algorithms.keys())
 
 
 print("Algorithm\t Average\t Standard Deviation")
-print("-"*40)
+print(line,line)
 
 
 for name in algorithm_names:
@@ -164,8 +168,10 @@ for name in algorithm_names:
 
 df_results = pd.DataFrame(results)
 
-# Algorithm comparison
+##############################################################
 # %%
+# Algorithm comparison
+##############################################################
 fig2 = plt.figure(figsize=(6,6))
 
 sns.boxplot(data = df_results)
@@ -174,6 +180,54 @@ plt.title("Algorithm Comparison")
 plt.tight_layout()
 plt.show()
 
+print("SVM seems to be the most accurate model.")
+print(dline,dline)
 
-
+##############################################################
 # %%
+# Results
+##############################################################
+
+
+# chosen_model = "SVM"
+for chosen_model in algorithm_names:
+    print(f"Chosen model: {chosen_model}")
+    print(dline,dline)
+    model = algorithms[chosen_model]
+
+    model.fit(train_X, train_y)
+    predictions = model.predict(val_X)
+
+
+    score = metrics.accuracy_score(val_y, predictions)
+    conf_matrix = metrics.confusion_matrix(val_y, predictions)
+    c_report = metrics.classification_report(val_y, predictions)
+
+    print(f"Accuracry score: {score:.3f}")
+    print(line)
+    print(f"Confusion matrix: \n{dline}\n{conf_matrix}\n")
+    print(line)
+    print(f"Classification report: \n{dline}\n{c_report}")
+
+    print(dline,dline)
+    print(dline,dline,"\n")
+
+
+##############################################################
+# %%
+# Conclusion
+##############################################################
+
+print(dline, dline)
+print("Conclusion")
+print(dline, dline)
+print("""
+    Across multiple algorithms, Support Vector Machines (SVM) achieved the highest
+    average accuracy on the Iris dataset, confirming its strength for small,
+    well-structured datasets. However, all models performed reasonably well,
+    reflecting the separability of the classes in this dataset.\n
+    Next steps could include hyperparameter tuning, testing on other datasets,
+    and exploring ensemble methods such as Random Forests or Gradient Boosting.
+      """
+)
+
