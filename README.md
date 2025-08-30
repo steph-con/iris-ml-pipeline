@@ -1,5 +1,7 @@
 # 🌸 End-to-End Machine Learning with the Iris Dataset
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Python](https://img.shields.io/badge/python-3.13-blue.svg) ![Conda](https://img.shields.io/badge/conda-ready-brightgreen.svg) ![scikit-learn](https://img.shields.io/badge/scikit--learn-ml-blue.svg)
+
 This project is an end-to-end implementation of a **machine learning pipeline** using the classic **Iris dataset**.  
 It walks through **data exploration, visualization, model training, evaluation, and comparison**, and is part of my **data science portfolio**.
 
@@ -46,4 +48,22 @@ Clone the repository:
 ```bash
 git clone https://github.com/steph-con/iris-ml-pipeline.git
 cd iris-ml-pipeline
+```
+
+## ⚙️ Installation
+
+You can run this project using either **Conda** (recommended) or **pip**.
+
+### Option 1: Using Conda (recommended)
+
+```bash
+conda env create -f environment.yml
+conda activate iris-ml
+```
+
+### Option 2: Using pip
+
+```bash
+conda env create -f environment.yml
+conda activate iris-ml
 ```
