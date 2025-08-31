@@ -1,9 +1,29 @@
+# ---
+# jupyter:
+#   jupytext:
+#     cell_metadata_filter: -all
+#     formats: py:percent,ipynb
+#     text_representation:
+#       extension: .py
+#       format_name: percent
+#       format_version: '1.3'
+#       jupytext_version: 1.17.3
+#   kernelspec:
+#     display_name: ds
+#     language: python
+#     name: python3
+# ---
+
+# %% [markdown]
+# # End-to-End Machine Learning with the Iris Dataset
+
+# %%
+# Import libraries
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
 from sklearn import model_selection, metrics
-# from dataclasses import dataclass
 
 # import models
 from sklearn.linear_model import LogisticRegression
@@ -15,16 +35,18 @@ from sklearn.svm import SVC
 
 from sklearn.datasets import load_iris
 #!%matplotlib ipympl
+print("Setup complete")
+##############################################################
 
-##############################################################
+# %% [markdown]
+# ## Load iris dataset
+
 # %%
-# Load iris dataset
-##############################################################
 iris = load_iris()
 dline = "="*35
 line = "-"*35
 
-# map target names to target and clasify the different iris
+# map target names to target and clasify the different iris species
 target_names = iris.target_names[iris.target]
 features = iris.feature_names
 
@@ -38,17 +60,20 @@ print(line)
 print(df_iris.describe())
 
 
-print(dline)
+print(dline, dline)
 print("\n\nCheck species distribution")
 print(line)
 print(df_iris.groupby("species").size())
 
 
 ##############################################################
-# %%
-# Data Visualisation
-##############################################################
+# %% [markdown]
+# ## Data Visualisation
 
+# %% [markdown]
+# ### Univariate plots
+
+# %%
 # Plot the different attributes of the dataset to check distributions
 fig1 = plt.figure(figsize=(7,5))
 
@@ -69,9 +94,12 @@ plt.show()
 
 
 # FROM SOURCE
-print("It looks like perhaps two of the input variables have a Gaussian\n" \
-    "distribution. This is useful to note as we can use algorithms\n" \
-    "that can exploit this assumption.")
+print("""
+      It looks like perhaps two of the input variables have a Gaussian
+      distribution. This is useful to note as we can use algorithms
+      that can exploit this assumption.
+      """
+)
 
 
 # %%
@@ -91,27 +119,27 @@ print("It looks like the features of all species display a Gausian distribution.
 plt.show()
 
 ##############################################################
+# %% [markdown]
+# ### Multivariate plots
+
 # %%
-##############################################################
-# Multivariate plots
-print("Check interactions between the variables. Plot attribute pairs.")
+# Check interactions between the variables. Plot attribute pairs.
 pp = sns.pairplot(df_iris, hue="species", diag_kind="kde", height=2)
 # Could have used pd.plotting.scatter_matrix(df_iris)
-pp._legend.set_title("Iris Species")
 
+pp._legend.set_title("Iris Species")
 
 # pp.tight_layout()
 # pp.savefig(fname=r"images\Multivariate_plot.png", dpi=450, format="png")
 
 plt.show()
 
-
-
 ##############################################################
+# %% [markdown]
+# ## Algorithm evaluation
+
 # %%
-# Algorithm evaluation
-##############################################################
-
+# Split training and validation datasets
 X = df_iris[features].values
 y = df_iris["species"].values
 
@@ -173,9 +201,10 @@ for name in algorithm_names:
 df_results = pd.DataFrame(results)
 
 ##############################################################
+# %% [markdown]
+# ## Algorithm Comparison
+
 # %%
-# Algorithm comparison
-##############################################################
 fig2 = plt.figure(figsize=(6,6))
 
 sns.boxplot(data = df_results)
@@ -193,15 +222,16 @@ print("SVM seems to be the most accurate model.")
 print(dline,dline)
 
 ##############################################################
-# %%
-# Results
-##############################################################
+# %% [markdown]
+# ## Results
 
+# %%
+# Going through all models
 
 # chosen_model = "SVM"
 for chosen_model in algorithm_names:
-    print(f"Chosen model: {chosen_model}")
-    print(dline,dline)
+    print(f"Model: {chosen_model}")
+    print(line)
     model = algorithms[chosen_model]
 
     model.fit(train_X, train_y)
@@ -212,32 +242,26 @@ for chosen_model in algorithm_names:
     conf_matrix = metrics.confusion_matrix(val_y, predictions)
     c_report = metrics.classification_report(val_y, predictions)
 
-    print(f"Accuracry score: {score:.3f}")
-    print(line)
-    print(f"Confusion matrix: \n{dline}\n{conf_matrix}\n")
-    print(line)
-    print(f"Classification report: \n{dline}\n{c_report}")
+    print(f"Accuracry score: {score:.3f}\n")
+    # print(line)
+    print(f"Confusion matrix: \n{conf_matrix}\n")
+    # print(line)
+    print(f"Classification report: \n{c_report}")
 
-    print(dline,dline)
+    # print(dline,dline)
     print(dline,dline,"\n")
 
-# Good to note that the validation dataset is small.
+# COMMENT FROM SOURCE
+print("It should be noted that the validation dataset is small.")
 
 ##############################################################
-# %%
-# Conclusion
-##############################################################
-
-print(dline, dline)
-print("Conclusion")
-print(dline, dline)
-print("""
-    Across multiple algorithms, Support Vector Machines (SVM) achieved the highest
-    average accuracy on the Iris dataset, confirming its strength for small,
-    well-structured datasets. However, all models performed reasonably well,
-    reflecting the separability of the classes in this dataset.\n
-    Next steps could include hyperparameter tuning, testing on other datasets,
-    and exploring ensemble methods such as Random Forests or Gradient Boosting.
-      """
-)
-
+# %% [markdown]
+# ## Conclusion
+#
+# Across multiple algorithms, Support Vector Machines (SVM) achieved the highest
+# average accuracy on the Iris dataset, confirming its strength for small,
+# well-structured datasets. However, all models performed reasonably well,
+# reflecting the separability of the classes in this dataset.
+#
+# Next steps could include hyperparameter tuning, testing on other datasets,
+# and exploring ensemble methods such as Random Forests or Gradient Boosting.
