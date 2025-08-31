@@ -97,8 +97,12 @@ plt.show()
 print("Check interactions between the variables. Plot attribute pairs.")
 pp = sns.pairplot(df_iris, hue="species", diag_kind="kde", height=2)
 # Could have used pd.plotting.scatter_matrix(df_iris)
+pp._legend.set_title("Iris Species")
 
-pp.tight_layout()
+
+# pp.tight_layout()
+# pp.savefig(fname=r"images\Multivariate_plot.png", dpi=450, format="png")
+
 plt.show()
 
 
@@ -177,7 +181,12 @@ fig2 = plt.figure(figsize=(6,6))
 sns.boxplot(data = df_results)
 
 plt.title("Algorithm Comparison")
+plt.ylim(bottom=0.8,top=1)
+sns.despine(trim=True)
+
 plt.tight_layout()
+
+# fig2.savefig(fname=r"images\Algorithm_Comparison.png",dpi=300, format="png")
 plt.show()
 
 print("SVM seems to be the most accurate model.")
