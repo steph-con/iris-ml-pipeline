@@ -2,6 +2,14 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Python](https://img.shields.io/badge/python-3.13-blue.svg) ![Conda](https://img.shields.io/badge/conda-ready-brightgreen.svg) ![scikit-learn](https://img.shields.io/badge/scikit--learn-ml-blue.svg)
 
+## 📑 Table of Contents
+
+- [Overview](#-project-overview)
+- [Results](#-results)
+- [Technologies](#️-technologies-used)
+- [Installation](#️-installation)
+- [Acknowledgements](#-acknowledgements)
+
 This project is an end-to-end implementation of a **machine learning pipeline** using the classic **Iris dataset**.
 It walks through **data exploration, visualization, model training, evaluation, and comparison**, and is part of my **data science portfolio**.
 
@@ -18,6 +26,8 @@ This includes:
 - Comparing performance
 - Drawing conclusions and discussing next steps
 
+👉 The main analysis and results can be found in the Jupyter Notebook: **iris_analysis.ipynb**
+
 ---
 
 ## 📊 Results
@@ -33,22 +43,13 @@ Future improvements could include hyperparameter tuning, ensemble methods (Rando
 
 ## ⚙️ Technologies Used
 
-- Python 3.x
+- Python 3.13
 - NumPy
 - Pandas
 - Matplotlib & Seaborn
 - Scikit-learn
 
 ---
-
-## 🚀 How to Run
-
-Clone the repository:
-
-```bash
-git clone https://github.com/steph-con/iris-ml-pipeline.git
-cd iris-ml-pipeline
-```
 
 ## ⚙️ Installation
 
@@ -64,9 +65,10 @@ conda activate iris-ml
 ### Option 2: Using pip
 
 ```bash
-conda env create -f environment.yml
-conda activate iris-ml
+pip install -r requirements.txt
 ```
+
+---
 
 ## 📖 Acknowledgements
 
